@@ -1,5 +1,7 @@
-	
+import TransformClass from './transformClass.js';	
+
 function setup() { "use strict";
+var transformClass = new TransformClass();
   	
 // Variables
 	var sliderLength = 100; // length of slider x and y
