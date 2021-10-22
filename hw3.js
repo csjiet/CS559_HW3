@@ -1,4 +1,4 @@
-import TransformClass from './transformClass.js';	
+import { TransformClass } from './transformClass.js';	
 
 function setup() { "use strict";
 var transformClass = new TransformClass();

@@ -1,11 +1,10 @@
-
 export class TransformClass{
 	
-	// Global variables
-	var stack = null;
+	
 	
 	constructor(){
-		this.stack = [mat3.create()];
+		// Global variables
+		//this.stack = [mat3.create()];
 	}
 
 
