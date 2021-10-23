@@ -1,8 +1,11 @@
 
 function setup() { "use strict";
 var transformClass = new TransformClass();
+
   	
 // Variables
+	var stack = [mat3.create()];
+
 	var sliderLength = 100; // length of slider x and y
 	var canvas = document.getElementById('myCanvas');
 	var updateAnimatorTracker = null;
@@ -80,6 +83,51 @@ var transformClass = new TransformClass();
 	var rightWingToInnerJointRotation = 0;
 	var rightWingToOuterJointRotation = rightWingToInnerJointRotation + innerAndOuterWingFlex;
 
+	function translation(x, y){
+
+		var Tx = mat3.create();
+		mat3.fromTranslation(Tx, [x, y]);
+		mat3.multiply(stack[0], stack[0], Tx);
+		
+	}
+
+	function rotate(rad){
+	
+		var Tx = mat3.create();
+		mat3.rotate(Tx, Tx, rad);
+		mat3.multiply(stack[0], stack[0], Tx);
+
+	}
+
+	function scale(sX, sY){
+		
+		var Tx = mat3.create();
+		mat3.scale(Tx, Tx, [sX, sY]);
+		mat3.multiply(stack[0], stack[0], Tx);
+	}
+
+	//Instance functions
+	function moveToTx(x, y){
+		var res = vec2.create();
+		vec2.transformMat3(res, [x,y], stack[0]);
+		
+		return res;
+	}
+
+	function lineToTx(x,y){
+		var res = vec2.create();
+		vec2.transformMat3(res, [x,y], stack[0]);
+		return res;
+	}
+
+	function push(){
+		this.stack.unshift(mat3.clone(stack[0]));
+	}
+
+	function pop(){
+		return stack.shift();
+	}
+
 
 	// This function defines a drawings on the canvas
   	function draw() {
@@ -90,10 +138,13 @@ var transformClass = new TransformClass();
     		var dx = sliderX.value;
     		var dy = sliderY.value;
 
+
+
 		//context.translate(50,0);
-		transformClass.translation(50, 0);
-		var tx = transformClass.stack[0];
+		translation(50, 0);
+		var tx = stack[0];
 		context.setTransform(tx[0], tx[1],tx[3],tx[4],tx[6],tx[7]);
+		
     
 		// This function draws sling shot
     		function DrawSlingShot() {
@@ -150,8 +201,8 @@ var transformClass = new TransformClass();
 			
 			// Replace with gl matrix translation
 			
-			transformClass.translation(-50, 0);
-			var tx = transformClass.stack[0];
+			translation(-50, 0);
+			var tx = stack[0];
 			context.setTransform(tx[0], tx[1],tx[3],tx[4],tx[6],tx[7]);
 
 			
@@ -274,9 +325,11 @@ var transformClass = new TransformClass();
 				//transformClass.push();
 				//context.translate(-50,0);
 
-				transformClass.translation(-50, 0);
-				var tx = transformClass.stack[0];
-				context.setTransform(tx[0], tx[1],tx[3],tx[4],tx[6],tx[7]);
+			// PROBLEM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+				// translation(-50, 0);
+				// var tx = stack[0];
+				// context.setTransform(tx[0], tx[1],tx[3],tx[4],tx[6],tx[7]);
 
 				context.beginPath();
 				
