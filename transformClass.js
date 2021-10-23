@@ -4,7 +4,7 @@ export class TransformClass{
 	
 	constructor(){
 		// Global variables
-		//this.stack = [mat3.create()];
+		this.stack = [mat3.create()];
 	}
 
 

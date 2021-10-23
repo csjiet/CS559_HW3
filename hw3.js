@@ -49,7 +49,8 @@ var transformClass = new TransformClass();
 	var numberOfGrassToTheRight = 4; // number of duplicated grasses
 	var distanceBetweenGrass = 100; // distance between each grass
 	var distanceChanged = 15; // distance between movement of the grasses
-	var speedOfGrass = 450; // speed of movement of grasses
+	var speedOfGrass = 600; // speed of movement of grasses
+	var tempGrassX = startingGrassX;
 
 	// Sun and moon variables
 	var sunMoonAnimatorTracker = null;
@@ -224,14 +225,17 @@ var transformClass = new TransformClass();
 			context.arc(startingGrassX + 30, startingGrassY, heightOfRightBush, 0, 2* Math.PI );
 			
 			// Draws the remaining bushe(s)
+			tempGrassX = startingGrassX;
 			for(var i = 0; i< numberOfGrassToTheRight; i++){
-				startingGrassX = startingGrassX + distanceBetweenGrass;
-				context.arc(startingGrassX, startingGrassY, heightOfLeftBush, 0, 2 * Math.PI);
-				context.arc(startingGrassX + 30, startingGrassY, heightOfRightBush, 0, 2* Math.PI);
+				
+				tempGrassX = tempGrassX + distanceBetweenGrass;
+				context.arc(tempGrassX, startingGrassY, heightOfLeftBush, 0, 2 * Math.PI);
+				context.arc(tempGrassX + 30, startingGrassY, heightOfRightBush, 0, 2* Math.PI);
+				
 				
 			}
 
-			startingGrassX = originalStartingGrassX; // Reset the position of the bush to create windy effect
+
 			context.fill();
 			context.restore();	
 		}
@@ -554,6 +558,11 @@ var transformClass = new TransformClass();
 		// Updates the position of all grasses
 		distanceChanged = distanceChanged * -1;
 		startingGrassX = startingGrassX + distanceChanged;
+
+		if(rockPosX >=600 || rockPosX <= -50 || rockPosY >= 279){
+
+			clearInterval(grassAnimatorTracker);
+		}
 		
 	}
 
@@ -648,7 +657,7 @@ var transformClass = new TransformClass();
 	// Lines that are commented means it has 
 	// its own rendering speed, which is different from what is defined here
 	function callAllAnimators(){
-		grassAnimator();
+		//grassAnimator();
 		sunAndMoonAnimator();
 		//targetAnimator();
 
@@ -660,6 +669,7 @@ var transformClass = new TransformClass();
 
 		
 	}
+
   	
  	
 	// This is a void function
@@ -671,7 +681,7 @@ var transformClass = new TransformClass();
 	sliderX.addEventListener("input", empty); // Slider that reflects the X position of sling string
   	sliderY.addEventListener("input", empty); // Slider that reflects the Y position of sling string
 	slingButton.addEventListener("click", slingRelease); // Button that fires the sling		
-	//grassAnimatorTracker = setInterval(grassAnimator, speedOfGrass); // Starts grass animator 
+	grassAnimatorTracker = setInterval(grassAnimator, speedOfGrass); // Starts grass animator 
 	//sunMoonAnimatorTracker = setInterval(sunAndMoonAnimator, speedOfSunMoonRotation);
 	targetAnimatorTracker = setInterval(targetAnimator, speedOfTarget);
 
