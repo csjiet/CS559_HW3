@@ -1,8 +1,6 @@
 
 function setup() { "use strict";
-var transformClass = new TransformClass();
 
-  	
 // Variables
 	var stack = [mat3.create()];
 
@@ -202,26 +200,15 @@ var transformClass = new TransformClass();
 		// This function draws ground where sling shot stands
 		function DrawPlatform(){
 			
-			//context.save();
 			push();
-			//context.translate(-50, 0);
-			
-			// Replace with gl matrix translation
-			
-			// translation(-50, 0);
-			// var tx = stack[0];
-			// context.setTransform(tx[0], tx[1],tx[3],tx[4],tx[6],tx[7]);
-
 			translation(-50, 0);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
-
-			
 			context.beginPath();
 			context.fillStyle = "brown";
 			context.fillRect(0, 295, 3000, 5);
-			//context.restore();
+			
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -242,6 +229,7 @@ var transformClass = new TransformClass();
 			context.stroke();
 			context.fillStyle = "grey";
 			context.fill();
+
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -251,7 +239,6 @@ var transformClass = new TransformClass();
 		function DrawAimAssist(){
 
 			// Get gradient of 2 points
-			//context.save();
 			push();
 			var speedMultiplier = Math.sqrt(Math.pow(slingStartX - (stringEndPosX + displacementOfStringX), 2) + Math.pow((slingStartY - (stringEndPosY+ displacementOfStringY) ), 2)) / 100;
 
@@ -276,7 +263,7 @@ var transformClass = new TransformClass();
 			context.moveTo(slingStartX + 10, m*(slingStartX+ 10) + c);
 			context.lineTo(slingStartX + (directionConstant)*8*speedMultiplier, m*(slingStartX+ (directionConstant)*8*speedMultiplier) + c);
 			context.stroke();
-			//context.restore();
+			
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -287,12 +274,11 @@ var transformClass = new TransformClass();
 		// This function draws welcome/ instruction message on the screen
 		function DrawLoadingScreen(){
 			
-			//context.save();
 			push();
 			context.fillStyle = "black";
 			context.font = context.font = '50px serif';
 			context.fillText('Press \'Sling!\' to launch!', 10, 90);
-			//context.restore();
+
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -301,7 +287,6 @@ var transformClass = new TransformClass();
 		// This function draws the grass 
 		function DrawGrass(){
 		
-			//context.save();
 			push();
 				
 			var heightOfLeftBush = 10; // stores the position of small bush
@@ -326,10 +311,8 @@ var transformClass = new TransformClass();
 				
 				
 			}
-
-
 			context.fill();
-			//context.restore();	
+	
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -343,9 +326,8 @@ var transformClass = new TransformClass();
 				
 
 				// Make changes to background color
-				//context.save();
+				
 				push();
-				//context.translate(-50,0);
 
 				translation(-50, 0);
 				var Tx = stack[0];
@@ -357,17 +339,16 @@ var transformClass = new TransformClass();
 				
 				context.fillRect(0, 0, canvas.width, canvas.height);
 				context.fill();
-				//context.restore();
+				
 				pop();
 				var Tx = stack[0];
 				context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
 
 				// Make changes to color
-				//context.save();
 				push();
 				context.beginPath();
-				//context.scale(scaleX, scaleY);
+	
 				scale(scaleX, scaleY);
 				var Tx = stack[0];
 				context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -377,7 +358,7 @@ var transformClass = new TransformClass();
 				context.fillStyle = "rgb(253, 224, 80)";
 				
 				context.fill();
-				//context.restore();
+	
 				pop();
 				var Tx = stack[0];
 				context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -390,9 +371,8 @@ var transformClass = new TransformClass();
 				function moonColorChanger(){
 					
 					// Make changes to background color
-					//context.save();
+
 					push();
-					//context.translate(-50,0);
 					translation(-50, 0);
 					var Tx = stack[0];
 					context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -401,7 +381,7 @@ var transformClass = new TransformClass();
 					context.fillStyle = "rgb(22, 73, 138)";
 					context.fillRect(0, 0, canvas.width, canvas.height);
 					context.fill();
-					//context.restore();
+					
 					pop();
 					var Tx = stack[0];
 					context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -409,18 +389,16 @@ var transformClass = new TransformClass();
 					
 
 					// Make changes to moon color
-					//context.save();
 					push();
 					context.beginPath();
-					//context.scale(scaleX, scaleY);
+		
 					scale(scaleX, scaleY);
 					var Tx = stack[0];
 					context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
-
 					context.arc(moonPosX, moonPosY, radOfMoon, 0, 2* Math.PI);
 					context.fillStyle = "grey";
 					context.fill();
-					//context.restore();
+				
 					pop();
 					var Tx = stack[0];
 					context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -449,10 +427,9 @@ var transformClass = new TransformClass();
 
 			// Left wing of target
 			// Left wing inner joint
-			//context.save();
 			push();
 			context.beginPath();
-			//context.translate(targetPosX, targetPosY);
+
 			translation(targetPosX, targetPosY);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -466,27 +443,27 @@ var transformClass = new TransformClass();
 			context.stroke();
 			context.fillRect(0, 0, innerJointSpan, 2);
 			context.fill();
-			//context.restore();
+		
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
 			// Left wing outer joint
-			//context.save();
+		
 			push();
 			context.beginPath();
-			//context.translate(targetPosX, targetPosY);
+			
 			translation(targetPosX, targetPosY);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
 
-			//context.translate((innerJointSpan* Math.cos(leftWingToInnerJointRotation * Math.PI / 180)), (innerJointSpan* Math.sin(leftWingToInnerJointRotation * Math.PI / 180)));
+			
 			translation((innerJointSpan* Math.cos(leftWingToInnerJointRotation * Math.PI / 180)), (innerJointSpan* Math.sin(leftWingToInnerJointRotation * Math.PI / 180)));
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
-			//context.rotate(leftWingToOuterJointRotation * Math.PI / 180);
+			
 			rotate(leftWingToOuterJointRotation * Math.PI / 180);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -495,7 +472,7 @@ var transformClass = new TransformClass();
 			context.stroke();
 			context.fillRect(0, 0, outerJointSpan, 2);
 			context.fill();
-			//context.restore();
+			
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -503,15 +480,14 @@ var transformClass = new TransformClass();
 
 			// Right wing of target
 			// Right wing inner joint
-			//context.save();
+			
 			push();
 			context.beginPath();
-			//context.translate(targetPosX, targetPosY);
+			
 			translation(targetPosX, targetPosY);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
-			//context.rotate(rightWingToInnerJointRotation * Math.PI / 180);
 			rotate(rightWingToInnerJointRotation * Math.PI / 180);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -520,26 +496,26 @@ var transformClass = new TransformClass();
 			context.stroke();
 			context.fillRect(0, 0, innerJointSpan, 2);
 			context.fill();
-			//context.restore();
+			
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
 			// Right wing outer joint
-			//context.save();
+			
 			push();
 			context.beginPath();
-			//context.translate(targetPosX, targetPosY);
+			
 			translation(targetPosX, targetPosY);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
-			//context.translate((innerJointSpan* Math.cos(rightWingToInnerJointRotation * Math.PI / 180)), (innerJointSpan* Math.sin(rightWingToInnerJointRotation * Math.PI / 180)));
+			
 			translation((innerJointSpan* Math.cos(rightWingToInnerJointRotation * Math.PI / 180)), (innerJointSpan* Math.sin(rightWingToInnerJointRotation * Math.PI / 180)));
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
 
-			//context.rotate(rightWingToOuterJointRotation * Math.PI / 180);
+			
 			rotate(rightWingToOuterJointRotation * Math.PI / 180);
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -548,7 +524,7 @@ var transformClass = new TransformClass();
 			context.stroke();
 			context.fillRect(0, 0, outerJointSpan, 2);
 			context.fill();
-			//context.restore();
+			
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -580,7 +556,7 @@ var transformClass = new TransformClass();
 		// This function draws the target (aka. piggy)
 		function DrawTarget(){
 			
-			//context.save();
+
 			push();
 
 			// Draw ears
@@ -655,7 +631,6 @@ var transformClass = new TransformClass();
 			context.strokeStyle = "black";
 			context.stroke();
 
-			//context.restore();
 			pop();
 			var Tx = stack[0];
 			context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -671,9 +646,9 @@ var transformClass = new TransformClass();
 				clearInterval(targetAnimatorTracker);
 				clearInterval(updateAnimatorTracker);
 				clearInterval(rockAnimatorTracker);
-				//context.save();
+				
 				push();
-				//context.translate(-50, 0);
+				
 				translation(-50, 0);
 				var Tx = stack[0];
 				context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -681,7 +656,7 @@ var transformClass = new TransformClass();
 				context.fillStyle = "red";
 				context.font = '70px serif';
 				context.fillText('LEVEL CLEARED! \nScore: 10/10', 10, 90);
-				//context.restore();
+				
 				pop();
 				var Tx = stack[0];
 				context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
@@ -693,8 +668,6 @@ var transformClass = new TransformClass();
 		
 		
 		// Calls all necessary drawing functions
-		//context.save();
-		//push();
 		
 		dayNightChanger();
 		// Checks if loading screen text should be drawn
@@ -710,7 +683,6 @@ var transformClass = new TransformClass();
 		DrawTarget();
 		DrawRockAndTargetCollisionDetectionText();
 		
-		//context.restore();
 		pop();
 		var Tx = stack[0];
 		context.setTransform(Tx[0], Tx[1],Tx[3],Tx[4],Tx[6],Tx[7]);
